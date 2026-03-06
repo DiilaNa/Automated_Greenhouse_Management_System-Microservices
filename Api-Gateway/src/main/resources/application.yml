@@ -18,6 +18,11 @@ spring:
             allowedHeaders: "*"
 
       routes:
+        - id: auth-service
+          uri: lb://Auth-SERVICE
+          predicates:
+            - Path=/api/v1/auth/**
+
         - id: zone-service
           uri: lb://ZONE-SERVICE
           predicates:
