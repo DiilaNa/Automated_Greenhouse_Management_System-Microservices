@@ -1,0 +1,14 @@
+server:
+  port: 8888
+
+spring:
+  application:
+    name: Config-Server
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://github.com/DiilaNa/Automated_Greenhouse_Management_System-Microservices.git
+          search-paths: config-repo
+
+#http://localhost:8888/application/default  check this url to confirm config server is running
