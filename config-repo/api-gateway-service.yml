@@ -10,7 +10,7 @@ spring:
       server:
         webflux:
           globalcors:
-            cors-configurations: # මෙතන ඉන්ඩෙන්ටේෂන් එක බලන්න
+            cors-configurations:
               '[/**]':
                 allowedOrigins: "*"
                 allowedMethods:
