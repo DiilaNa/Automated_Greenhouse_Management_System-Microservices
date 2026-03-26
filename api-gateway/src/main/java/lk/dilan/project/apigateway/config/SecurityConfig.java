@@ -17,8 +17,7 @@ public class SecurityConfig {
                 .authorizeExchange(exchange -> exchange
                         .pathMatchers("/auth/**").permitAll()
                         .anyExchange().authenticated()
-                )
-                .oauth2ResourceServer(oauth -> oauth.jwt(jwt -> {}));
+                );
 
         return http.build();
     }

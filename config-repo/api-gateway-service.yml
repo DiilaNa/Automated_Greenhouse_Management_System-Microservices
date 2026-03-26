@@ -7,25 +7,27 @@ jwt:
 spring:
   cloud:
     gateway:
-      globalcors:
-        cors-configurations:
-          '[/**]':
-            allowedOrigins: "*"
-            allowedMethods:
-              - GET
-              - POST
-              - PUT
-              - DELETE
-              - PATCH
-              - OPTIONS
-            allowedHeaders: "*"
-      routes:
-        - id: auth-service
-          uri: http://104.211.95.241:8080
-          predicates:
-            - Path=/auth/**
-          filters:
-            - RewritePath=/auth/(?<segment>.*), /api/auth/${segment}
+      server:
+        webflux:
+          globalcors:
+            cors-configurations: # මෙතන ඉන්ඩෙන්ටේෂන් එක බලන්න
+              '[/**]':
+                allowedOrigins: "*"
+                allowedMethods:
+                  - GET
+                  - POST
+                  - PUT
+                  - DELETE
+                  - PATCH
+                  - OPTIONS
+                allowedHeaders: "*"
+          routes:
+            - id: auth-service
+              uri: http://104.211.95.241:8080
+              predicates:
+                - Path=/auth/**
+              filters:
+                - RewritePath=/auth/(?<segment>.*), /api/auth/${segment}
 
 eureka:
   client:
