@@ -3,7 +3,7 @@ server:
 
 spring:
   application:
-    name: Config-Server
+    name: config-server
   cloud:
     config:
       server:
@@ -12,3 +12,11 @@ spring:
           search-paths: config-repo
 
 #http://localhost:8888/application/default  check this url to confirm config server is running
+
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+
