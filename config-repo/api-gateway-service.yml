@@ -29,6 +29,11 @@ spring:
               filters:
                 - RewritePath=/auth/(?<segment>.*), /api/auth/${segment}
 
+            - id: zone-service
+              uri: lb://ZONE-SERVICE
+              predicates:
+                - Path=/api/zones/**
+
 eureka:
   client:
     service-url:
