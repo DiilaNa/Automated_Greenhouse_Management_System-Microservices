@@ -34,7 +34,7 @@ spring:
               predicates:
                 - Path=/api/zones/**
               filters:
-                  - AuthenticationFilter
+                - name: AuthenticationFilter
 
 eureka:
   client:
