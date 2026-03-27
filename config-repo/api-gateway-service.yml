@@ -33,6 +33,8 @@ spring:
               uri: lb://ZONE-SERVICE
               predicates:
                 - Path=/api/zones/**
+              filters:
+                  - AuthenticationFilter
 
 eureka:
   client:

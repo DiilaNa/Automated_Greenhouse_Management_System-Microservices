@@ -17,12 +17,13 @@ export const authMiddleware = (
   const token = authHeader.split(" ")[1];
 
   try {
-    const decoded = jwt.verify(token, process.env.JWT_SECRET as string);
+    const secret = process.env.JWT_SECRET as string;
+    const decoded = jwt.verify(token, Buffer.from(secret, "base64"));
 
     (req as any).user = decoded;
-
-    next(); 
-  } catch (error) {
+    next();
+  } catch (error: any) {
+    console.log("JWT Error:", error.message);
     res.status(403).json({ message: "Invalid or Expired Token" });
   }
 };
