@@ -10,16 +10,7 @@ class ZoneController {
       res.status(400).json({ message: error.message });
     }
   }
-
-  async getZones(req: Request, res: Response) {
-    try {
-      const zones = await zoneService.getAllZones();
-      res.status(200).json(zones);
-    } catch (error: any) {
-      res.status(500).json({ message: error.message });
-    }
-  }
-
+  
   async getOneZone(req: Request, res: Response) {
     try {
       const zone = await zoneService.getZoneDetails(req.params.id as string);

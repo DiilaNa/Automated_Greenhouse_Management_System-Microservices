@@ -1,7 +1,5 @@
 import dotenv from "dotenv";
 import express from "express";
-import mongoose from "mongoose";
-import { Eureka } from "eureka-js-client"; 
 import router from "./routes/zone.routes";
 import { eurekaClient } from "./config/server";
 import { connectDB } from "./config/db";

@@ -3,10 +3,14 @@ export interface CreateZoneDTO {
   zoneName: string;
   description?: string;
   climateCondition?: string;
+  minTemp: number; 
+  maxTemp: number;
 }
 
 export interface UpdateZoneDTO {
   zoneName?: string;
   description?: string;
   climateCondition?: string;
+  minTemp?: number;
+  maxTemp?: number;
 }

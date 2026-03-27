@@ -1,13 +1,11 @@
 import { Router } from "express";
-import { authMiddleware } from "../middleware/middleware";
 import zoneController from "../controller/zone.controller";
 
 const router = Router();
 
 router.post("/saveZone", zoneController.saveZone);
-router.get("/getAllZones", authMiddleware, zoneController.getZones);
-router.get("/getZoneDetails/:id", authMiddleware, zoneController.getOneZone);
-router.put("/updateZone/:id", authMiddleware, zoneController.updateZone);
-router.delete("/deleteZone/:id", authMiddleware, zoneController.removeZone);
+router.get("/getZoneDetails/:id", zoneController.getOneZone);
+router.put("/updateZone/:id", zoneController.updateZone);
+router.delete("/deleteZone/:id", zoneController.removeZone);
 
 export default router;

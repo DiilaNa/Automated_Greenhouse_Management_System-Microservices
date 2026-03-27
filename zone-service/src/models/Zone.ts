@@ -5,6 +5,9 @@ export interface IZone extends Document {
   zoneName: string;
   description: string;
   climateCondition: string;
+  minTemp: number;
+  maxTemp: number;
+  deviceId: string; 
 }
 
 const ZoneSchema: Schema = new Schema(
@@ -13,6 +16,9 @@ const ZoneSchema: Schema = new Schema(
     zoneName: { type: String, required: true },
     description: { type: String },
     climateCondition: { type: String },
+    minTemp: { type: Number, required: true },
+    maxTemp: { type: Number, required: true },
+    deviceId: { type: String },
   },
   { timestamps: true },
 );

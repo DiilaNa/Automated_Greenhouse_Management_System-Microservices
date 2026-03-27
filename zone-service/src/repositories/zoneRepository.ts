@@ -6,9 +6,6 @@ class ZoneRepository {
     return await Zone.create(data);
   }
 
-  async findAll(): Promise<IZone[]> {
-    return await Zone.find();
-  }
 
   async findById(id: string): Promise<IZone | null> {
     return await Zone.findOne({ zoneId: id });
