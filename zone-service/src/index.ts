@@ -15,7 +15,7 @@ connectDB();
 
 eurekaClient.start();
 
-app.use("/api/v1/zone", router)
+app.use("/api/zones", router)
 
 app.listen(SERVER_PORT, () => {
     console.log(`🚀 Zone Service running on port ${SERVER_PORT}`);

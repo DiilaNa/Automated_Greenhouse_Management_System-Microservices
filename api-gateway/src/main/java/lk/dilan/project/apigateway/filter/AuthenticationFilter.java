@@ -24,7 +24,6 @@ public class AuthenticationFilter extends AbstractGatewayFilterFactory<Authentic
     @Override
     public GatewayFilter apply(Config config) {
         return (exchange, chain) -> {
-            System.out.println("Check");
             if (!exchange.getRequest().getHeaders().containsKey(HttpHeaders.AUTHORIZATION)) {
                 throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Missing Authorization Header");
             }
@@ -35,9 +34,9 @@ public class AuthenticationFilter extends AbstractGatewayFilterFactory<Authentic
             }
 
             try {
-                System.out.println("check header");
                 jwtUtil.validateToken(authHeader);
             } catch (Exception e) {
+                System.out.println(e.getMessage());
                 throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Invalid or Expired Token");
             }
             return chain.filter(exchange);
