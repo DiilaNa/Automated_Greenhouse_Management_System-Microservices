@@ -1,0 +1,9 @@
+server:
+  port: 8082
+
+external:
+  iot_api_url: "http://external-iot-api.com/api/sensors"
+  automation_url: "http://localhost:8083/api/automation/process"
+
+jwt:
+  secret: a-string-secret-at-least-256-bits-long

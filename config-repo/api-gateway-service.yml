@@ -36,6 +36,13 @@ spring:
               filters:
                 - name: AuthenticationFilter
 
+            - id: sensor-telemetry-service
+              uri: lb://SENSOR-TELEMETRY-SERVICE
+              predicates:
+                - Path=/api/sensors/**
+              filters:
+                - name: AuthenticationFilter
+
 eureka:
   client:
     service-url:
