@@ -18,6 +18,7 @@ eureka_client.init(
 )
 
 if __name__ == '__main__':
+    print("inside scheduler")
     start_scheduler()
     print("🚀 Sensor Telemetry Service running on port 8082")
     app.run(host='0.0.0.0', port=8082)
