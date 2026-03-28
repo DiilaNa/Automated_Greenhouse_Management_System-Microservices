@@ -1,6 +1,10 @@
 import requests
+import os
 from src.models.sensor_model import sensor_store
 from src.config.config_loader import ConfigLoader
+from dotenv import load_dotenv
+
+load_dotenv()
 
 class TelemetryService:
     _current_token = None
@@ -9,10 +13,11 @@ class TelemetryService:
     def get_new_access_token():
         print("🔄 Attempting to refresh Access Token...")
         REFRESH_URL = "http://104.211.95.241:8080/api/auth/refresh"
-        refresh_token = ConfigLoader.get('external.refresh_token')
+
+        refresh_token = os.getenv('EXTERNAL_REFRESH_TOKEN') or ConfigLoader.get('external.refresh_token')
 
         if not refresh_token:
-            print("❌ Error: No Refresh Token found in Config Server!")
+            print("❌ Error: No Refresh Token found in .env or Config Server!")
             return None
 
         try:
@@ -34,9 +39,14 @@ class TelemetryService:
     @staticmethod
     def process_all_telemetry():
         print("\n--- ⏳ Telemetry Cycle Started ---")
+
         ZONE_API = ConfigLoader.get('services.zone_url')
         IOT_API_BASE = ConfigLoader.get('external.iot_api_url')
         AUTO_API = ConfigLoader.get('services.automation_url')
+
+        if not ZONE_API:
+            print("⚠️ Waiting for Config Server...")
+            return
 
         if not TelemetryService._current_token:
             TelemetryService.get_new_access_token()
@@ -50,17 +60,17 @@ class TelemetryService:
             zones = res.json()
             for zone in zones:
                 device_id = zone.get('deviceId')
-                if not device_id or device_id == "dev-001": continue
+                if not device_id or device_id == "dev-001":
+                    continue
 
                 fetch_url = f"{IOT_API_BASE}/{device_id}"
-
                 headers = {"Authorization": TelemetryService._current_token}
+
                 response = requests.get(fetch_url, headers=headers, timeout=5)
 
                 if response.status_code == 401:
                     print(f"⚠️ 401 Unauthorized for {device_id}. Refreshing token...")
                     if TelemetryService.get_new_access_token():
-                        # අලුත් ටෝකන් එකෙන් ආයෙත් කෝල් කරනවා
                         headers = {"Authorization": TelemetryService._current_token}
                         response = requests.get(fetch_url, headers=headers, timeout=5)
 
@@ -76,8 +86,12 @@ class TelemetryService:
                         "humidity": data.get('humidity'),
                         "capturedAt": response.json().get('capturedAt')
                     }
-                    requests.post(AUTO_API, json=payload, timeout=2)
-                    print(f"🚀 Pushed to Automation for {zone.get('zoneId')}")
+
+                    try:
+                        requests.post(AUTO_API, json=payload, timeout=2)
+                        print(f"🚀 Pushed to Automation for {zone.get('zoneId')}")
+                    except:
+                        print(f"⚠️ 8083 (Automation Service) is unreachable.")
                 else:
                     print(f"❌ Failed to fetch for {device_id}: Status {response.status_code}")
 
