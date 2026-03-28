@@ -4,10 +4,24 @@ import zoneService from "../services/zoneService";
 class ZoneController {
   async saveZone(req: Request, res: Response) {
     try {
-      const zone = await zoneService.createZone(req.body);
+      const token = req.headers.authorization;
+
+      if (!token) {
+        return res.status(401).json({ message: "No token provided" });
+      }
+      const zone = await zoneService.createZone(req.body,token);
       res.status(201).json(zone);
     } catch (error: any) {
       res.status(400).json({ message: error.message });
+    }
+  }
+
+  async getAll(req: Request, res: Response) {
+    try {
+      const zones = await zoneService.getAllZones();
+      res.status(200).json(zones);
+    } catch (error: any) {
+      res.status(500).json({ message: error.message });
     }
   }
   

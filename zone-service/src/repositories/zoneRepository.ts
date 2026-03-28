@@ -18,6 +18,10 @@ class ZoneRepository {
   async delete(id: string): Promise<IZone | null> {
     return await Zone.findOneAndDelete({ zoneId: id });
   }
+
+  async findAll(): Promise<IZone[]> {
+    return await Zone.find();
+  }
 }
 
 export default new ZoneRepository();

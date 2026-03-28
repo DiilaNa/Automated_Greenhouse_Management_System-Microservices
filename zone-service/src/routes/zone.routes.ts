@@ -7,5 +7,6 @@ router.post("/saveZone", zoneController.saveZone);
 router.get("/getZoneDetails/:id", zoneController.getOneZone);
 router.put("/updateZone/:id", zoneController.updateZone);
 router.delete("/deleteZone/:id", zoneController.removeZone);
+router.get("/getAllZones", zoneController.getAll);
 
 export default router;
