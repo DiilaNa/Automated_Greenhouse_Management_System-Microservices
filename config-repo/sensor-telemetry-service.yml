@@ -2,8 +2,12 @@ server:
   port: 8082
 
 external:
-  iot_api_url: "http://external-iot-api.com/api/sensors"
-  automation_url: "http://localhost:8083/api/automation/process"
+  iot_api_url: "http://104.211.95.241:8080/api/devices/telemetry"
 
 jwt:
   secret: a-string-secret-at-least-256-bits-long
+
+
+services:
+  zone_url: "http://localhost:8081/api/zones/getAllZones"
+  automation_url: "http://localhost:8083/api/automation/process"

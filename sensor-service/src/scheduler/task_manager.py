@@ -4,10 +4,7 @@ import threading
 from src.services.telemetry_service import TelemetryService
 
 def job():
-    print("Running scheduled telemetry task...")
-    data = TelemetryService.fetch_from_iot()
-    if data:
-        TelemetryService.push_to_automation(data)
+    TelemetryService.process_all_telemetry()
 
 def start_scheduler():
     schedule.every(10).seconds.do(job)
