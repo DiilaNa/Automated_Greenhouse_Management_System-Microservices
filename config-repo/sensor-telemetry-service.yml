@@ -3,10 +3,10 @@ server:
 
 external:
   iot_api_url: "http://104.211.95.241:8080/api/devices/telemetry"
+  auth_token: "Bearer <TOKEN_HERE>"
 
 jwt:
   secret: a-string-secret-at-least-256-bits-long
-
 
 services:
   zone_url: "http://localhost:8081/api/zones/getAllZones"

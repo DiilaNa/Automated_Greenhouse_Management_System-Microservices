@@ -1,8 +1,11 @@
 import py_eureka_client.eureka_client as eureka_client
 from flask import Flask
+
+from src.config.config_loader import ConfigLoader
 from src.controllers.sensor_controller import sensor_bp
 from src.scheduler.task_manager import start_scheduler
 
+ConfigLoader.load_from_server()
 app = Flask(__name__)
 
 app.register_blueprint(sensor_bp, url_prefix='/api/sensors')

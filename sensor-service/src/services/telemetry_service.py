@@ -8,7 +8,11 @@ class TelemetryService:
         ZONE_API = ConfigLoader.get('services.zone_url')
         IOT_API_BASE = ConfigLoader.get('external.iot_api_url')
         AUTO_API = ConfigLoader.get('services.automation_url')
-        TOKEN = ConfigLoader.get('external.auth_token') 
+        TOKEN = ConfigLoader.get('external.auth_token')
+
+        if not ZONE_API or not IOT_API_BASE:
+            print(f"❌ Error: Config missing! ZONE_API: {ZONE_API}, IOT_API_BASE: {IOT_API_BASE}")
+            return
 
         try:
             zones_response = requests.get(ZONE_API, timeout=5)
