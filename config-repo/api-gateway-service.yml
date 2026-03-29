@@ -5,6 +5,8 @@ jwt:
   secret: a-string-secret-at-least-256-bits-long
 
 spring:
+  application:
+      name: API-GATEWAY
   cloud:
     gateway:
       server:
@@ -40,6 +42,13 @@ spring:
               uri: lb://SENSOR-TELEMETRY-SERVICE
               predicates:
                 - Path=/api/sensors/**
+              filters:
+                - name: AuthenticationFilter
+
+            - id: automation-service
+              uri: lb://AUTOMATION-SERVICE
+              predicates:
+                - Path=/api/automation/**
               filters:
                 - name: AuthenticationFilter
 

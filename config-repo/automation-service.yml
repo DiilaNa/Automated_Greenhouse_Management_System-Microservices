@@ -2,4 +2,4 @@ server:
   port: 8083
 
 services:
-  zone_url: "http://localhost:8081/api/zones"
+  zone_url: "http://localhost:8081/api/zones/getZoneDetails"
