@@ -1,0 +1,6 @@
+server:
+  port: 8084
+database:
+  url: "root:Ijse@1234@tcp(127.0.0.1:3306)/agms_crop_db?charset=utf8mb4&parseTime=True&loc=Local"
+eureka:
+  server: "http://localhost:8761/eureka"

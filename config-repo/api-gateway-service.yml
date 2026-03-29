@@ -52,6 +52,13 @@ spring:
               filters:
                 - name: AuthenticationFilter
 
+            - id: crop-inventory-service
+              uri: lb://CROP-INVENTORY-SERVICE
+              predicates:
+                - Path=/api/crops/**
+              filters:
+                - name: AuthenticationFilter
+
 eureka:
   client:
     service-url:
